@@ -1,14 +1,43 @@
 0. VSCode 사용
 
 1. python venv - 가상환경 만드는 용도로 사용
-필수 : cmd -> mkdir OnlineStore -> cd OnlineStore -> py3 -m venv .venv or python -m venv .venv -> .venv\Scripts\activate.bat 
+필수 : cmd -> mkdir OnlineStore -> cd OnlineStore
+-> py3 -m venv .venv or python -m venv .venv -> .venv\Scripts\activate.bat 
 
 2. Flask - 데이터 보여주기 용도로 사용 / 파이썬 기반 웹 프레임워크로 요청하는 일을 해주는 도구
 requirements.txt 라는 txt 파일을 만든 후 내용을 작성한 후 cmd 에 venv을 이용한 가상환경으로 접속
 -> pip install -r requirements.txt 작성 후 엔터를 한다면 requirements.txt 안에 있는 것들을 설치
--> cmd 창에 flask run을 작성하여 보통 시작
+-> cmd 창에 flask run 혹은 python app.py를 작성하여 보통 시작
 
 3. mongoDB - 데이터 저장 용도로 사용
 www.mongodb.com에 접속하여 회원가입 후 다운로드
 
 4. mongoDB Compass
+
+=============================================================================================
+
+1. CRUD = Create(새로운 데이터 저장하기), Read(저장된 데이터 보여주기),
+          Update(저장된 데이터 수정하기), Delete(저장된 데이터 삭제하기)
+
+2. 데이터 저장하기 = [POST]/products/regist / 보여주기 = [GET]/products/list
+   수정하기 = [PUT]/products/:id / 삭제하기 = [DELETE]/products/:id
+
+3. insomnia rest api client 검색 후 다운로드
+
+=============================================================================================
+1. product_form.html 에 해당함
+id를 이용하여 아래와 같이 가능. #은 아이디를 뜻함 .은 class를 뜻함
+<style>
+    #form {
+        color: red;
+    }
+    #regist-button {
+        color: blue;
+    }
+    .input-style {
+      border-color: red;
+    }
+</style>
+
+2. bootstrap(V5.1.3) 사용
+css, forms 검색 후 HTML 코드를 복사 붙여넣기.
