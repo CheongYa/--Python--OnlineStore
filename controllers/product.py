@@ -20,8 +20,14 @@ def regist():
     # 이미지 파일 정보
     thumbnail_img = request.files.get('thumbnail_img')
     detail_img = request.files.get('detail_img')
-    thumbnail_img_url = _upload_file(thumbnail_img)
-    detail_img_url = _upload_file(detail_img)
+    thumbnail_img_url = ""
+    detail_img_url = ""
+
+    if thumbnail_img:
+        thumbnail_img_url = _upload_file(thumbnail_img)
+    if detail_img:
+        detail_img_url = _upload_file(detail_img)
+
     Product.insert_one(form_data, thumbnail_img_url, detail_img_url) # 저장하는 일
 
     return "상품 등록 API입니다."
@@ -41,6 +47,24 @@ def delete(product_id):
     Product.delete_one(product_id)
     
     return "상품이 정삭적으로 삭제되었습니다."
+
+# 상품 정보 수정 API
+@product.route('/<product_id>/update', methods=['POST'])
+def update(product_id):
+    form_data = request.form
+    thumbnail_img = request.files.get('thumbnail_img')
+    detail_img = request.files.get('detail_img')
+    thumbnail_img_url = ""
+    detail_img_url = ""
+    
+    if thumbnail_img:
+        thumbnail_img_url = _upload_file(thumbnail_img)
+    if detail_img:
+        detail_img_url = _upload_file(detail_img)
+
+    Product.update_one(product_id, form_data, thumbnail_img_url, detail_img_url)
+
+    return "정상적으로 상품이 수정되었습니다."
 
 def _upload_file(img_file):
     timestamp = str(datetime.now().timestamp())

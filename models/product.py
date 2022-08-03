@@ -29,3 +29,25 @@ class Product():
     def delete_one(id):
         db = conn_mongodb()
         db.products.delete_one({'_id': ObjectId(id)})
+
+    @staticmethod
+    def update_one(id, product, thumbnail_img_url, detail_img_url):
+        db = conn_mongodb()
+
+        new_product = {
+            'name':product['name'],
+            'price': product['price'],
+            'description': product['description'],
+            'user': 'admin',
+            'update_at': int(datetime.now().timestamp())
+        }
+
+        if thumbnail_img_url:
+            new_product['thumbnail_img'] = thumbnail_img_url
+        if detail_img_url:
+            new_product['detail_img'] = detail_img_url
+
+        db.products.update_one(
+            {'_id': ObjectId(id)},
+            {'$set': new_product}
+        )
