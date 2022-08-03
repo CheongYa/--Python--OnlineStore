@@ -32,7 +32,7 @@ def get_products():
     # 상품 리스트 정보 = mongo db products 컬렉션이 있는 documents
     products = Product.find()
 
-    return render_template('products.html', products1=products)
+    return render_template('products.html', products=products)
 
 
 def _upload_file(img_file):
