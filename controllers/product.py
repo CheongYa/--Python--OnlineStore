@@ -73,6 +73,13 @@ def update(product_id):
 
     return redirect(url_for('product.get_products'))
 
+# 상품 상세 정보 페이지 API
+@product.route('/<product_id>/detail')
+def detail(product_id):
+    product = Product.find_one(product_id)
+
+    return render_template('product.html', product=product)
+
 def _upload_file(img_file):
     timestamp = str(datetime.now().timestamp())
     filename = timestamp + '_' + secure_filename(img_file.filename)

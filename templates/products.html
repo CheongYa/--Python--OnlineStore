@@ -44,7 +44,7 @@
                             <p class="card-text">price: {{product['price']}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                                <a href="/products/{{product['_id']}}/detail" class="btn btn-sm btn-outline-primary">View</a>
                                 <a href="/products/{{product['_id']}}/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
                                 <a href="/products/{{product['_id']}}/delete" class="btn btn-sm btn-outline-danger">Delete</a> <!--색은 Bootstrap에서 color 검색-->
                                 </div>
