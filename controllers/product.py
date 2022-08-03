@@ -34,6 +34,13 @@ def get_products():
 
     return render_template('products.html', products=products)
 
+# 상품 삭제
+@product.route('/<product_id>/delete') # product_id = 특정상품의 고유번호
+def delete(product_id):
+    # 상품 삭제 구현
+    Product.delete_one(product_id)
+    
+    return "상품이 정삭적으로 삭제되었습니다."
 
 def _upload_file(img_file):
     timestamp = str(datetime.now().timestamp())
