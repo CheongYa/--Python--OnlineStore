@@ -51,3 +51,10 @@ class Product():
             {'_id': ObjectId(id)},
             {'$set': new_product}
         )
+
+    @staticmethod
+    def find_one(id):
+        db = conn_mongodb()
+        product = db.products.find_one({'_id': ObjectId(id)})
+
+        return product

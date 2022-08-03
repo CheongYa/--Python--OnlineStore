@@ -1,11 +1,11 @@
-from flask import request, render_template
+from flask import request, render_template, redirect, url_for
 from .blueprint import product
 from models.product import Product
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
 
-
+# 상품 등록 페이지 API
 @product.route('/form')
 def form():
     return render_template('product_form.html')
@@ -48,6 +48,13 @@ def delete(product_id):
     
     return "상품이 정삭적으로 삭제되었습니다."
 
+# 상품 정보 수정 페이지 API
+@product.route('/<product_id>/edit')
+def edit(product_id):
+    product = Product.find_one(product_id)
+
+    return render_template('product_edit.html', product=product)
+
 # 상품 정보 수정 API
 @product.route('/<product_id>/update', methods=['POST'])
 def update(product_id):
@@ -64,7 +71,7 @@ def update(product_id):
 
     Product.update_one(product_id, form_data, thumbnail_img_url, detail_img_url)
 
-    return "정상적으로 상품이 수정되었습니다."
+    return redirect(url_for('product.get_products'))
 
 def _upload_file(img_file):
     timestamp = str(datetime.now().timestamp())

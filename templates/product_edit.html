@@ -8,21 +8,21 @@
                 <div class="col-4">
                     <div>
                         <hr>
-                        <h3 class="pt-2 pd-2 text-center">상품 등록</h3> <!--start, center, end 로 글자 위치 조절--> <!--pt = padding top, pd = padding down 으로 위, 아래의 여백을 늘림 f12로도 확인 가능-->
+                        <h3 class="pt-2 pd-2 text-center">상품 수정</h3> <!--start, center, end 로 글자 위치 조절--> <!--pt = padding top, pd = padding down 으로 위, 아래의 여백을 늘림 f12로도 확인 가능-->
                         <hr>
                     </div>
-                    <form action="/products/regist" method="post" enctype="multipart/form-data">
+                    <form action="/products/{{product['_id']}}/update" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">상품 등록</label>
-                            <input name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                            <input name="name" value = "{{product['name']}}"type="text" class="form-control" id="name" aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">상품 가격</label>
-                            <input name="price" type="text" class="form-control" id="price">
+                            <input name="price" value = "{{product['price']}}" type="text" class="form-control" id="price">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">상품 설명</label>
-                            <textarea name="description" type="text" class="form-control" id="description"></textarea> <!--textarea = input과는 다르게 크기 늘리기 가능-->
+                            <textarea name="description" type="text" class="form-control" id="description">{{product['description']}}</textarea> <!--textarea = input과는 다르게 크기 늘리기 가능-->
                         </div>
                         <div class="mb-3">
                             <label for="thumbnail_img" class="form-label">썸네일 이미지</label>
