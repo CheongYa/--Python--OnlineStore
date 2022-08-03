@@ -26,6 +26,15 @@ def regist():
 
     return "상품 등록 API입니다."
 
+# 상품 리스트 조회 API
+@product.route('/list')
+def get_products():
+    # 상품 리스트 정보 = mongo db products 컬렉션이 있는 documents
+    products = Product.find()
+
+    return render_template('products.html', products1=products)
+
+
 def _upload_file(img_file):
     timestamp = str(datetime.now().timestamp())
     filename = timestamp + '_' + secure_filename(img_file.filename)
