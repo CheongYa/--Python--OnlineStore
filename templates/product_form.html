@@ -1,9 +1,5 @@
-<html>
-    <head>
-        <title>탭에 보여지는 내용입니다.</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    </head>
-    <body>
+{% extends "base.html" %}
+{% block content %}
         <div class="container"> <!--구역 구분 용도--> <!--container = 양옆 여백-->
             <div class="row">
                 <div class="col-4"> <!--col-4 = 12개의 구역을 4구역으로 좌측, 중앙, 우측 을 가짐 -->
@@ -43,5 +39,4 @@
                 </div>
             </div>
         </div>
-    </body>
-</html>
+{% endblock %}
