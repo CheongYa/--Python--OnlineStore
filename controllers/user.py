@@ -1,4 +1,4 @@
-from flask import request, render_template, flash, redirect, url_for
+from flask import request, render_template, flash, redirect, url_for, session
 from .blueprint import user
 from .blueprint import product
 from models.user import User
@@ -23,3 +23,16 @@ def signup():
 
     User.insert_one(form_data)
     return redirect(url_for('product.get_products'))
+
+# 로그인 API
+@user.route('/signin', methods=['POST'])
+def signin():
+    form_data = request.form
+    user = User.sign_in(form_data)
+
+    if not user:
+        flash("이메일 주소 또는 비밀번호를 확인해주세요.")
+        return render_template('user_signin.html')
+    else:
+        session['user_id'] = str(user['_id'])
+        return redirect(url_for('product.get_products'))
