@@ -24,6 +24,11 @@ def signup():
     User.insert_one(form_data)
     return redirect(url_for('product.get_products'))
 
+# 로그인 페이지 API
+@user.route('/signin')
+def signin_forn():
+    return render_template('user_signin.html')
+
 # 로그인 API
 @user.route('/signin', methods=['POST'])
 def signin():
@@ -36,3 +41,9 @@ def signin():
     else:
         session['user_id'] = str(user['_id'])
         return redirect(url_for('product.get_products'))
+
+# 로그아웃
+@user.route('/signout')
+def signout():
+    session.pop('user_id', None) # 없애기
+    return redirect(url_for('product.get_products'))
