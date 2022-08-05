@@ -1,3 +1,5 @@
+<!--상세 페이지-->
+
 {% extends "base.html" %}
 {% block content %}
 
@@ -16,7 +18,15 @@
                             <hr>
                             <p class="card-text">{{product['description']}}</p>
                             <hr>
-                            <p class="card-text text-end">{{product['price']}}원</p>
+                            <div class="d-flex flex-row-reverse bd-highlight d-flex align-items-center">
+                                <div class="p-2 bd-highlight">
+                                    <a href="/products/{{product['_id']}}/order" class="btn btn-outline-primary">구매하기</a> <!--a태그는 text-end 사용 불가 고로 flex 검색-->
+                                </div>
+                                <div class="p-2 bd-highlight">
+                                    <p class="card-text text-end">{{product['price']}}원</p>
+                                </div>
+                                <div class="p-2 bd-highlight"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

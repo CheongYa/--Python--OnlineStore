@@ -96,6 +96,13 @@ def detail(product_id):
 
     return render_template('product.html', product=product)
 
+@product.route('/<product_id>/order')
+def order_form(product_id):
+    product = Product.find_one(product_id)
+
+    return render_template('order_form.html', product=product)
+
+
 def _upload_file(img_file):
     timestamp = str(datetime.now().timestamp())
     filename = timestamp + '_' + secure_filename(img_file.filename)
