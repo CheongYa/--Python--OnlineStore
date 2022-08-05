@@ -1,4 +1,4 @@
-from flask import request, render_template, redirect, url_for
+from flask import request, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from .blueprint import product
 from .auth import is_admin
@@ -18,6 +18,9 @@ def form():
 # 상품 등록 API
 @product.route('/regist', methods=['POST']) # blueprint.py 쪽으로 들어감
 def regist():
+    if not is_admin():
+        return redirect(url_for('product.get_products'))
+
     # 전달받은 상품 정보
     form_data = request.form
 
@@ -34,7 +37,7 @@ def regist():
 
     Product.insert_one(form_data, thumbnail_img_url, detail_img_url) # 저장하는 일
 
-    return "상품 등록 API입니다."
+    return redirect(url_for('product.get_products'))
 
 # 상품 리스트 조회 API
 @product.route('/list')
@@ -47,14 +50,20 @@ def get_products():
 # 상품 삭제
 @product.route('/<product_id>/delete') # product_id = 특정상품의 고유번호
 def delete(product_id):
+    if not is_admin():
+        return redirect(url_for('product.get_products'))
+
     # 상품 삭제 구현
     Product.delete_one(product_id)
     
-    return "상품이 정삭적으로 삭제되었습니다."
+    return redirect(url_for('product.get_products'))
 
 # 상품 정보 수정 페이지 API
 @product.route('/<product_id>/edit')
 def edit(product_id):
+    if not is_admin():
+        return redirect(url_for('product.get_products'))
+
     product = Product.find_one(product_id)
 
     return render_template('product_edit.html', product=product)
@@ -62,6 +71,9 @@ def edit(product_id):
 # 상품 정보 수정 API
 @product.route('/<product_id>/update', methods=['POST'])
 def update(product_id):
+    if not is_admin():
+        return redirect(url_for('product.get_products'))
+        
     form_data = request.form
     thumbnail_img = request.files.get('thumbnail_img')
     detail_img = request.files.get('detail_img')
