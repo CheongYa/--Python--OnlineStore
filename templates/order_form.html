@@ -16,21 +16,20 @@
                 <div class="card-body">
                   <h5 class="card-title">{{product['name']}}</h5>
                   <p class="card-text text-end">{{product['price']}}</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
             <hr>
             <h4>배송지 / 주문자 정보</h4>
-            <form action="/products/regist" method="post">
+            <form action="/products/{{product['_id']}}/order" method="post">
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
-                            <input type="text" class="form-control" id="sample6_postcode" placeholder="우편번호">
+                            <input type="text" name="postcode" class="form-control" id="sample6_postcode" placeholder="우편번호">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
-                            <input type="button" name="postcode" class="btn btn-outline-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+                            <input type="button" class="btn btn-outline-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
                         </div>
                     </div>
                 </div>

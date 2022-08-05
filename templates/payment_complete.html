@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container"> <!--구역 구분 용도--> <!--container = 양옆 여백-->
+    <div class="row">
+        <div class="col-4"> <!--col-4 = 12개의 구역을 4구역으로 좌측, 중앙, 우측 을 가짐 -->
+
+         </div>
+        <div class="col-4">
+            <div>
+                <hr>
+                <h3 class="pt-2 pd-2 text-center">주문 성공</h3> <!--start, center, end 로 글자 위치 조절--> <!--pt = padding top, pd = padding down 으로 위, 아래의 여백을 늘림 f12로도 확인 가능-->
+                <hr>
+            </div>
+            <p class="text-center">주문이 성공적으로 완료되었습니다.</p>
+        </div>
+        <div class="col-4">
+        </div>
+    </div>
+</div>
+{% endblock %}

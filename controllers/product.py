@@ -1,8 +1,9 @@
 from flask import request, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from .blueprint import product
-from .auth import is_admin
+from .auth import is_admin, redirect_to_signin_form, check_login
 from models.product import Product
+from models.order import Order
 from datetime import datetime
 import os
 
@@ -96,11 +97,26 @@ def detail(product_id):
 
     return render_template('product.html', product=product)
 
+# 주문 페이지 API
 @product.route('/<product_id>/order')
 def order_form(product_id):
     product = Product.find_one(product_id)
 
     return render_template('order_form.html', product=product)
+
+# 주문 생성 API
+@product.route('/<product_id>/order', methods=['POST'])
+def order(product_id):
+    user = check_login()
+    if not user:
+        return redirect_to_signin_form()
+
+    product = Product.find_one(product_id)
+    form_data = request.form
+
+    Order.insert_one(product, form_data, user)
+
+    return render_template('payment_complete.html') # 무조건 성공했다고 가정
 
 
 def _upload_file(img_file):
