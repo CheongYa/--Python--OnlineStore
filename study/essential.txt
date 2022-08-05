@@ -53,3 +53,7 @@ docs에 navbar 검색하여 코드 사용
 
 1. bootstrap 사용
 docs에 card 검색 후 Horizontal 사용
+
+=================================================================================
+
+1. mongoDB에서 users 폴더로 들어가 is_admin: True 그리고 끝에 속성을 Boolean으로 만듬 / 7-3

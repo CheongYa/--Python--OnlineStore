@@ -1,13 +1,17 @@
 from flask import request, render_template, redirect, url_for
+from werkzeug.utils import secure_filename
 from .blueprint import product
+from .auth import is_admin
 from models.product import Product
 from datetime import datetime
-from werkzeug.utils import secure_filename
 import os
 
 # 상품 등록 페이지 API
 @product.route('/form')
 def form():
+    if not is_admin():
+        return redirect(url_for('product.get_products')) # admin이 아니면 리스트페이지로 옮김 즉, 관리자가 아니면 상품등록을 못함 / 안보이면 좋겠지만 보안상 이유로 방어벽 반드시 생성
+
     return render_template('product_form.html')
 
 

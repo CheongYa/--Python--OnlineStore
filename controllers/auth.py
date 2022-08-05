@@ -16,3 +16,10 @@ def check_login():
 def redirect_to_signin_form():
     flash('로그인이 필요합니다.')
     return redirect(url_for('user.signin_form'))
+
+def is_admin():
+    user = check_login() # 로그인 판단
+    if not user:
+        return False
+
+    return user.get('is_admin', False) # get은 is_admin이 없다면 None을 리턴해줌, 지정했기에 False를 리턴

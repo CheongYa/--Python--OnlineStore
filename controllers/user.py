@@ -1,7 +1,7 @@
 from flask import request, render_template, flash, redirect, url_for, session
 from .blueprint import user
 from .blueprint import product
-from .auth import check_login, redirect_to_signin_form
+from .auth import check_login, is_admin, redirect_to_signin_form, is_admin
 from models.user import User
 
 # 회원가입 페이지 API
@@ -41,6 +41,9 @@ def signin():
         return render_template('user_signin.html')
     else:
         session['user_id'] = str(user['_id'])
+        if is_admin():
+            session['is_admin'] = True
+
         return redirect(url_for('product.get_products'))
 
 # 로그아웃
@@ -51,4 +54,6 @@ def signout():
         return redirect_to_signin_form()
 
     session.pop('user_id', None) # 없애기
+    session.pop('is_admin', None)
+
     return redirect(url_for('product.get_products'))
