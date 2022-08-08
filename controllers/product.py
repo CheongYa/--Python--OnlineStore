@@ -1,6 +1,7 @@
 from flask import request, render_template, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 from .blueprint import product
+from .blueprint import payment
 from .auth import is_admin, redirect_to_signin_form, check_login
 from models.product import Product
 from models.order import Order
@@ -114,9 +115,9 @@ def order(product_id):
     product = Product.find_one(product_id)
     form_data = request.form
 
-    Order.insert_one(product, form_data, user)
+    order_id = Order.insert_one(product, form_data, user)
 
-    return render_template('payment_complete.html') # 무조건 성공했다고 가정
+    return redirect(url_for('payment.request_payment', order_id=order_id)) # 무조건 성공했다고 가정
 
 
 def _upload_file(img_file):
