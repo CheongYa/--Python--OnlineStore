@@ -19,3 +19,15 @@ class Order():
             'created_at': int(datetime.now().timestamp()),
             'update_at': int(datetime.now().timestamp())
         })
+
+    def find():
+        db = conn_mongodb()
+        orders = db.orders.find({})
+
+        return orders
+
+    def find_one(order_id):
+        db = conn_mongodb()
+        order = db.orders.find_one({'_id': ObjectId(order_id)})
+
+        return order
