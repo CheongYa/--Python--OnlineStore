@@ -22,9 +22,9 @@ class Order():
 
         return new_order_doc.inserted_id
 
-    def find():
+    def find(match={}):
         db = conn_mongodb()
-        orders = db.orders.find({})
+        orders = db.orders.find(match)
 
         return orders
 

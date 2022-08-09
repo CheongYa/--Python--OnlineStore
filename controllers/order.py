@@ -12,7 +12,8 @@ def get_orders():
     if not user:
         return redirect_to_signin_form()
 
-    orders = Order.find()
+    match = {'status': 'complete'} # status가 complete인 것만 보여주게 하는 것
+    orders = Order.find(match)
     return render_template('orders.html', orders=orders)
 
 
