@@ -33,3 +33,7 @@ class Order():
         order = db.orders.find_one({'_id': ObjectId(order_id)})
 
         return order
+
+    def update_one(order_id, status):
+        db = conn_mongodb()
+        db.orders.update_one({'_id': ObjectId(order_id)}, {'$set': status})
