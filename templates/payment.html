@@ -39,10 +39,19 @@
                 data: JSON.stringify(data)
               }).done(function (data){
                 // 가맹점 서버 결제 API 성공시 로직
+                if (data.message = 'success'){
+                  const order_id = data.order_id
+                  location.href = '/payments/success?order_id=${order_id}'
+                } else {
+                  alert(data.message)
+                  location.href = '/products/list'
+                }
               })
           } else {
+            // 결제 실패 시 로직,
             console.log('결제 실패')
-              // 결제 실패 시 로직,
+            alert('결제에 실패하였습니다.')
+            location.href = '/products/list'
           }
       });
     }

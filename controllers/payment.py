@@ -52,7 +52,7 @@ def complete_payment():
 
     order = Order.fine_one(merchant_uid)
     if not order:
-        return jsonify({"존재하지 않는 주문입니다."})
+        return jsonify({'message': "존재하지 않는 주문입니다."})
 
     if payment_data and payment_data['amount'] == order['product']['price']:
         status = 'success'
@@ -60,9 +60,14 @@ def complete_payment():
     else:
         status = 'fail'
         Payment.insert_one(order, payment_data, status)
-        return jsonify({"비전상적인 주문입니다."})
+        return jsonify({'message': "비정상적인 결제입니다."})
 
     status = {'status': 'complete'}
     Order.update_one(merchant_uid, status)
 
     return jsonify({'order_id': merchant_uid, 'message': 'success'})
+
+@payment.route('/success')
+def success():
+    order_id = request.args.get('order_id')
+    return render_template('payment_complete.html', order_id=order_id)

@@ -9,7 +9,7 @@ class Product():
         db = conn_mongodb()
         db.products.insert_one({
             'name':product['name'],
-            'price': product['price'],
+            'price': int(product['price']),
             'description': product['description'],
             'thumbnail_img': thumbnail_img_url,
             'detail_img': detail_img_url,
@@ -36,7 +36,7 @@ class Product():
 
         new_product = {
             'name':product['name'],
-            'price': product['price'],
+            'price': int(product['price']),
             'description': product['description'],
             'user': 'admin',
             'update_at': int(datetime.now().timestamp())
