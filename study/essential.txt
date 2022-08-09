@@ -74,3 +74,12 @@ docs에 card 검색 후 Horizontal 사용
 1. 아임포트 검색 후 가입 -> 관리자 콘솔 들어가기
 
 2. 아임포트 사용자메뉴얼 따라하기
+
+==================================================================================================
+
+1. heroku를 사용하여 웹사이트 배보
+
+heroku를 검색 후 가입 -> heroku cli windows를 검색 후 들어가서 install하기 ->
+터미널 들어가 heroku login 작성 -> heroku create OnlineStore1 작성 -> 작성 시 앱이 만들어짐 ->
+git init -> git add . -> git commit -m "first commit" -> git push heroku master 작성 ->
+(heroku git:remote -a (바꿀 이름)을 하게 된다면 이름 변경 가능)
